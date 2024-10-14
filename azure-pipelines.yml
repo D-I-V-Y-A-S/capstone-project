@@ -1,42 +1,22 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# For more information, see: https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
-- master  # Trigger the pipeline on commits to the master branch
+- master
 
 pool:
-  vmImage: ubuntu-latest  # Use the latest Ubuntu virtual machine
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: Maven@3
   inputs:
-    mavenPomFile: 'pom.xml'  # Path to the Maven POM file
-    mavenOptions: '-Xmx3072m'  # Set the maximum heap size for Maven
-    javaHomeOption: 'JDKVersion'  # Specify the JDK version option
-    jdkVersionOption: '1.11'  # Use JDK version 11
-    jdkArchitectureOption: 'x64'  # Use the 64-bit architecture
-    publishJUnitResults: true  # Publish JUnit test results
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'  # Path to test result files
-    goals: 'package'  # Maven goal to execute (package, install, etc.)
-
-# Optionally, add steps for code analysis, artifact publishing, and notifications
-
-- script: |
-    echo "Running code analysis..."
-    mvn clean verify  # Run additional Maven goals, such as verification
-  displayName: 'Run Code Analysis'
+    mavenPomFile: 'pom.xml'
+    goals: 'package'
+  
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)'
+    Contents: '**/target/*.jar'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'target'  # Path to the directory containing build artifacts
-    ArtifactName: 'drop'  # Name of the published artifact
-    publishLocation: 'Container'  # Publish the artifact to a container
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: |
-      echo "Sending notification after build..."
-      # Add your notification command here (e.g., Slack, email)
-  displayName: 'Send Notification'
+    pathToPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
