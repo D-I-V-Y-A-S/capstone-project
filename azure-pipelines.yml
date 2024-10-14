@@ -1,13 +1,21 @@
 trigger:
-- master  # Trigger the pipeline on commits to the master branch
+- master
 
 pool:
-  vmImage: 'ubuntu-latest'  # Use the latest Ubuntu virtual machine
+  vmImage: 'ubuntu-latest'
 
-jobs:
-- job: BuildAndPublish  # Define a single job
-  steps:
-  - task: Maven@3
-    inputs:
-      mavenPomFile: 'demo/pom.xml'  
-      goals: 'package'
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'package'
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'pom.xml'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
