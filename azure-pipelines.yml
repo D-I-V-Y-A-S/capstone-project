@@ -9,6 +9,5 @@ jobs:
   steps:
   - task: Maven@3
     inputs:
-      mavenPomFile: 'demo/pom.xml'  # Path to the Maven POM file
-      goals: 'package'  # Maven goal to execute (e.g., package)
-
+      mavenPomFile: 'demo/pom.xml'  
+      goals: 'package'
