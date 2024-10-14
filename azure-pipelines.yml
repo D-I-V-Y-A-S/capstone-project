@@ -11,6 +11,7 @@ steps:
     goals: 'package'
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'  # or your artifact path
-    ArtifactName: 'drop'  # name of the artifact
+    PathtoPublish: 'demo/target'  # Adjust this path according to where your artifacts are generated
+    ArtifactName: 'drop'
     publishLocation: 'Container'
+
