@@ -12,13 +12,3 @@ jobs:
       mavenPomFile: 'demo/pom.xml'  # Path to the Maven POM file
       goals: 'package'  # Maven goal to execute (e.g., package)
 
-  - task: CopyFiles@2
-    inputs:
-      SourceFolder: '$(System.DefaultWorkingDirectory)'  # Default working directory
-      Contents: '**/target/*.jar'  # Specify the pattern for JAR files
-      TargetFolder: '$(Build.ArtifactStagingDirectory)'  # Target directory for copied files
-
-  - task: PublishBuildArtifacts@1
-    inputs:
-      pathToPublish: '$(Build.ArtifactStagingDirectory)'  # Path to publish artifacts from
-      artifactName: 'drop'  # Name of the published artifact
