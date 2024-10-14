@@ -1,0 +1,17 @@
+trigger:
+- master
+
+pool:
+  name: 'Default'
+
+steps:
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'demo/pom.xml'
+    goals: 'package'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'demo/target'  # Adjust this path according to where your artifacts are generated
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
