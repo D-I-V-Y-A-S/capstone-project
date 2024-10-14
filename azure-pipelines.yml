@@ -9,3 +9,8 @@ steps:
   inputs:
     mavenPomFile: 'demo/pom.xml'
     goals: 'package'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'  # or your artifact path
+    ArtifactName: 'drop'  # name of the artifact
+    publishLocation: 'Container'
