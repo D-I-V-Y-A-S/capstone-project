@@ -1,9 +1,7 @@
 trigger:
 - master
-
 pool:
   name: 'Default'
-
 steps:
 - task: Maven@4
   inputs:
@@ -14,4 +12,3 @@ steps:
     PathtoPublish: 'demo/target'  # Adjust this path according to where your artifacts are generated
     ArtifactName: 'drop'
     publishLocation: 'Container'
-
