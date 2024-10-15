@@ -7,7 +7,6 @@ pool:
 steps:
 - task: Maven@4
   inputs:
-    azureSubscription: 'Free Trial (7a0a02f9-8709-48f8-9bdc-46e63bf41cf5)'
     mavenPomFile: 'demo/pom.xml'
     goals: 'test'
     publishJUnitResults: true
