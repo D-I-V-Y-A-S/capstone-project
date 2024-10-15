@@ -7,11 +7,19 @@ pool:
 steps:
 - task: Maven@4
   inputs:
+    azureSubscription: 'Free Trial (7a0a02f9-8709-48f8-9bdc-46e63bf41cf5)'
     mavenPomFile: 'demo/pom.xml'
-    goals: 'package'
+    goals: 'test'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    mavenVersionOption: 'Default'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: 'demo/target'  # Adjust this path according to where your artifacts are generated
+    PathtoPublish: 'demo/target' 
     ArtifactName: 'drop'
     publishLocation: 'Container'
 
