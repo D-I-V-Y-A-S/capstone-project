@@ -1,4 +1,4 @@
-****Simple Java Spring Boot Application with Azure DevOps Pipeline****  
+<b>****Simple Java Spring Boot Application with Azure DevOps Pipeline****</b>  
 To demonstrate the setup of a CI/CD pipeline using Azure DevOps to automate the build and deployment process of a Java Spring Boot application.
 
 ***Tools and technologies***  
